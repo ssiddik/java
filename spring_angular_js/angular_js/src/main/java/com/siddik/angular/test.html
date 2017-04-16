@@ -1,0 +1,78 @@
+
+ <div ng-controller="c1">
+ 
+ {{s}}
+ <button nc-click="t()">cliclk</button>
+ {{data.id}}
+ {{data.name}}
+ 
+ 
+ </div>
+
+ 
+
+<script type="text/javascript">
+var app=angular.module("app1",[]);
+
+app.controller("c1",function($scope,$http){
+	$scope.s="test";
+	
+ 
+	 $http.get('get_Data')
+     .success(function(data,status) {
+         $scope.data= data;
+
+    	 console.log(status);
+     }).error(function(data,status){
+    	 
+    	 
+    	 console.log(status);
+     })
+     
+ 
+ 
+});
+
+
+
+</script>
+
+
+
+
+
+
+@RequestMapping(value="get_Data",method=RequestMethod.GET)
+
+public @ResponseBody test  get_datass()
+{
+ test na = new test();
+na.setId(55);
+na.setName("siddik");
+ return na;
+}
+
+
+package com.siddik.angular;
+
+public class test {
+	private int id;
+	
+	private String name;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+}
